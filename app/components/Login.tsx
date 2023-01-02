@@ -1,9 +1,11 @@
 'use client'
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from '../../redux/action';
 
 type LoginProps = {
   username: string,
@@ -26,8 +28,10 @@ export default function Login() {
     password: ''
   });
 
-  const router = useRouter()
 
+  const dispatch = useDispatch()
+  
+  const router = useRouter()
   const handleChange = (e : FormEvent<HTMLInputElement>) => {
     setUserdata({
       ...userdata,
@@ -44,13 +48,15 @@ export default function Login() {
         }) ;
       }
     }
-    localStorage.setItem('token', JSON.stringify(data?.data))
-    console.log(data)
-     Swal.fire({
+    localStorage.setItem('token', data?.data.data)
+    dispatch(setToken())
+    Swal.fire({
       text:data.data.message
     })
-    return router.push('/')
+    return router.push('/home')
   }
+
+
 
   return (
      <div>

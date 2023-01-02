@@ -25,7 +25,8 @@ function NavBar() {
 
   return (
     //ocultar boton logout si hay token!
-    <div className='flex gap-2'>
+    <div className='absolute z-50'>
+    <div className='flex w-screen justify-center gap-2'>
       {
         user === true ? <Logout /> : ''
       }
@@ -33,7 +34,12 @@ function NavBar() {
       <Link href='/home'>
       <button className='p-2 bg-black text-white'>Home</button>
       </Link>
+      <Link href='/profile'>
+      <button className='p-2 bg-black text-white'>Profile</button>
+      </Link>
     </div>
+    </div>
+
   )
 }
 

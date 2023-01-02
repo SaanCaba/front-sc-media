@@ -1,10 +1,12 @@
 'use client'
 import axios from 'axios'
+import Image from 'next/dist/client/image'
 import React,{FormEvent, useState} from 'react'
 import Swal from 'sweetalert2'
 import { getFileExtension2 } from '../../utils/getfileExtension'
 import { publishProduct } from '../../utils/newProduct'
-
+import styles from '../styles/FormProduct.module.css'
+import Loader from './Loader'
 
 type FileTypes = {
     lastModified: number
@@ -100,25 +102,35 @@ function FormProduct() {
     }
 
   return (
-    <div className='flex flex-col' >
+    <div className={load ? `h-screen flex flex-col relative ${styles.noOverflow}` : `${styles.noOverflow} h-screen bg-black flex flex-col relative`} >
         {
             load ? (
-                <div className='h-screen w-full'>
-                    <div className='flex justify-center items-center'>
-                        <h1 className='text-white'>Cargando...</h1>
+                <div  className={` absolute ${styles.cargandoEdit} ${styles.noOverflow}`}>
+                    <div className='h-screen w-screen flex items-center justify-center'>
+                    <div style={{marginTop:'70px'}} >
+                        <Loader />
                     </div>
                 </div>
+                </div>
+
             ) : ''
         }
-        <input name='image' value={fileInput} onChange={(e) => handleFileInputChange(e)} type='file' />
+        <div style={{marginTop:'70px'}} className='flex justify-center mt-4'>
+            <div className='flex flex-col'>
+
+
+        <input name='image' style={{width:'250px'}} value={fileInput} onChange={(e) => handleFileInputChange(e)} type='file' />
        {
         previewSource && (
-            <img src={previewSource} style={{height:'300px'}} />
+            <div className='flex justify-center'>
+            <Image src={previewSource} alt={info.name} height={250} width={250} />
+            </div>
+        
         )
        }
        {/* <button onClick={() => handleSubmitFile()}>upload image</button> */}
-        <input className='border border-black m-1' type="text" value={info.name} name='name' onChange={(e) => handleChange(e)} />
-        <select onChange={(e) => handleSelectChange(e)}>
+        <input style={{width:'250px'}} className='border border-black m-1' type="text" value={info.name} name='name' onChange={(e) => handleChange(e)} />
+        <select style={{width:'250px'}} onChange={(e) => handleSelectChange(e)}>
             {
                 options.map((e, i) => {
                     return(
@@ -128,10 +140,14 @@ function FormProduct() {
             }
         </select>
         {/* <input className='border border-black m-1' type="text" value={info.category} name='category' onChange={(e) => handleChange(e)} /> */}
-        <button className='bg-[#81d2eb] p-2' onClick={(e) => handleForm(e)}>PUBLISH</button>
+        <button style={{width:'250px'}} className='bg-[#81d2eb] p-2' onClick={(e) => handleForm(e)}>PUBLISH</button>
         {
             test.length > 0 && <img src={test} style={{height:'300px'}} />
         }
+            </div>
+
+        </div>
+
     </div>
   )
 }

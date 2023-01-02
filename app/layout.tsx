@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Provider store={store}>
-        <body>
+        <body className='relative z-0'>
           <NavBar />
             {children}
         </body>

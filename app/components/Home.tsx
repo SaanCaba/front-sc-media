@@ -11,6 +11,7 @@ type Props = {
     name: string,
     img:string,
     category: string
+    _id: string
   }>
 }
 
@@ -20,23 +21,25 @@ function Home({products}: Props) {
   
     let router = useRouter()
     
-    //al final no, lo dejo por las dudas.
+    // al final no, lo dejo por las dudas.
 
-    // const ISSERVER = typeof window === "undefined";
-    // useEffect(() => {
-    // if(localStorage.getItem('token') === undefined || localStorage.getItem('token') === null){
-    //   Swal.fire({
-    //     text:'Necesitas iniciar sesión!'
-    //   })
-    //   return router.push('/login')
-    // }
-    // if (!ISSERVER){
-    //   const item = window.localStorage.getItem('token')
-    //   if(item === null || item === undefined){
-    //    return router.push('/login')
-    //   }
-    // }
-    // },[ISSERVER])
+    const ISSERVER = typeof window === "undefined";
+    useEffect(() => {
+    if(localStorage.getItem('token') === undefined || localStorage.getItem('token') === null){
+      Swal.fire({
+        text:'Necesitas iniciar sesión!'
+      })
+      return router.push('/login')
+    }
+    if (!ISSERVER){
+      const item = window.localStorage.getItem('token')
+      if(item === null || item === undefined){
+       return router.push('/login')
+      }
+    }
+    },[ISSERVER])
+
+    console.log(products)
 
   return (
     <div className='flex flex-wrap'>

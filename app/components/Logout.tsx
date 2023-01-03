@@ -11,6 +11,8 @@ function Logout() {
 
     const handleClick = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('userID')
+        localStorage.removeItem('userName')
         dispatch(deleteToken())
        return router.push('/login')
     }

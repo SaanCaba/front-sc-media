@@ -50,6 +50,7 @@ export default function Login() {
     }
     localStorage.setItem('token', data?.data.data)
     localStorage.setItem('userID', data?.data.id)
+    localStorage.setItem('userName', data?.data.username)
     dispatch(setToken())
     Swal.fire({
       text:data.data.message

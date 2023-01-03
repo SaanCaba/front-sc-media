@@ -14,7 +14,8 @@ async function getData(){
 type DataTypes = {
     name:string,
     img: string,
-    category:string
+    category:string,
+    _id: string
 }
 
 export default async function HomePage() {

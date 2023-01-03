@@ -1,11 +1,13 @@
-import { DELETE_TOKEN, SET_TOKEN } from "./action"
+import { DELETE_TOKEN, SET_TOKEN, SET_USERNAME } from "./action"
 
 type States = {
     userToken : boolean
+    username: string
 }
 
 const initialState: States = {
-    userToken: false
+    userToken: false,
+    username: ''
 }
 
 type Action = {
@@ -28,7 +30,11 @@ export function rootReducer(state = initialState , action: Action) : any{
                 ...state,
                 userToken: false
             }  
-
+        case SET_USERNAME:
+            return{
+                ...state,
+                username: action.payload
+            }
           default: 
           return state
         }

@@ -17,7 +17,7 @@ function Product({product}: Props) {
               <Link href={`home/${product._id}`}>
             <h1>{product.name}</h1>
               </Link>
-            <Image style={{width:'auto', height:'auto'}} width={200} height={200} src={product.img} alt={product.name} />
+            <Image width={200} height={200} src={product.img} alt={product.name} />
             <span>{product.category}</span>
             </div>
   )

@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import Product from './Product';
 
@@ -20,11 +21,14 @@ type Props = {
 function Home({products}: Props) {
   
     let router = useRouter()
-    
+    const [theme, setTheme] = useState<null | string>('')
     // al final no, lo dejo por las dudas.
 
     const ISSERVER = typeof window === "undefined";
     useEffect(() => {
+      let tema = localStorage.getItem('theme')
+      setTheme(tema)
+      console.log(theme)
     if(localStorage.getItem('token') === undefined || localStorage.getItem('token') === null){
       Swal.fire({
         text:'Necesitas iniciar sesión!'
@@ -37,12 +41,11 @@ function Home({products}: Props) {
        return router.push('/login')
       }
     }
-    },[ISSERVER])
 
-    console.log(products)
+    },[ISSERVER, theme])
 
   return (
-    <div className='flex flex-wrap'>
+    <div className={theme === 'dark' ? 'bg-[#343538] text-white h-screen flex flex-wrap gap-5' : 'flex h-screen flex-wrap gap-5'}>
       {
         products.map((e, i) => {
           return(

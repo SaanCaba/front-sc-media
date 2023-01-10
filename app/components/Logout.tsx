@@ -4,7 +4,11 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteToken } from '../../redux/action'
 
-function Logout() {
+interface Props{
+  theme : string | null
+}
+
+function Logout({theme} : Props) {
 
     const router = useRouter()
     const dispatch = useDispatch()
@@ -18,7 +22,7 @@ function Logout() {
     }
 
   return (
-    <button className='p-2 bg-black text-white' onClick={() => handleClick()}>LOGOUT</button>
+    <button className={ theme === 'dark' ? 'p-2 bg-white text-black' : 'p-2 bg-black text-white'} onClick={() => handleClick()}>LOGOUT</button>
   )
 }
 

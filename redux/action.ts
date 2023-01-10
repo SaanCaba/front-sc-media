@@ -1,6 +1,7 @@
 export const SET_TOKEN = "SET_TOKEN"
 export const DELETE_TOKEN = "DELETE_TOKEN"
 export const SET_USERNAME = "SET_USERNAME"
+export const SET_THEME = "SET_THEME"
 
 export function setToken(){
 
@@ -19,5 +20,11 @@ export function deleteToken(){
 export function setUserName(name: string | null){
     return {
         type: SET_USERNAME, payload: name
+    }
+}
+
+export function setTheme(theme:string){
+    return{
+            type: SET_THEME, payload: theme
     }
 }

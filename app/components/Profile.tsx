@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react'
 import Swal from 'sweetalert2'
 import { changePass } from '../../utils/changePass'
-
+import {MdDarkMode, MdLightMode} from 'react-icons/md'
 
 function Profile() {
 
@@ -11,13 +11,17 @@ const [newPassword, setNewPassword] = useState('')
 const [repeatPss, setRepeatPss] = useState('')
 const [userId, setUserId] = useState<null | string>('')
 const [username, setUsername] = useState<null | string>('')
+const [dark, setDark] = useState<null | string>('')
 
     useEffect(() => {
         if(localStorage.getItem('userID') !== null || localStorage.getItem('userID') !== undefined ){
             setUserId(localStorage.getItem('userID'))
             setUsername(localStorage.getItem('userName'))
         }
-    }, [])
+        let theme = localStorage.getItem('theme')
+        setDark(theme)
+    }, [dark])
+
 
 
     const handleChangePass = async () => {
@@ -62,6 +66,18 @@ const [username, setUsername] = useState<null | string>('')
       return setActive(false)
     }
 
+    const handleTheme = () => {
+        let tema = localStorage.getItem('theme')
+        console.log(tema)
+        setDark(tema)
+        if(tema === 'dark'){
+            localStorage.setItem('theme', 'light')
+        }else{
+            localStorage.setItem('theme', 'dark') 
+        }
+    }
+    console.log(dark)
+
   return (
     <div className='relative'>
         {
@@ -99,6 +115,9 @@ const [username, setUsername] = useState<null | string>('')
         </div>
         <div>
             <button className='p-2 bg-black rounded text-white m-2'>Ver Productos</button>
+        </div>
+        <div>
+            <button onClick={()=>handleTheme()}>{dark === 'dark' ? 'claro' : 'oscuro' }</button>
         </div>
         </div>
     </div>

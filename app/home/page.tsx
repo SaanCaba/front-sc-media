@@ -20,6 +20,7 @@ type DataTypes = {
 
 export default async function HomePage() {
   const data:Array<DataTypes> = await getData()
+  console.log(data)
   return (
     <>
       <Home products={data} />

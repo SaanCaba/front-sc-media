@@ -87,10 +87,12 @@ function FormProduct() {
         
         let data: any =  await publishProduct(info)
         console.log(data)
-        Swal.fire({
+       await Swal.fire({
             text:data.data || data.response.data.message
         }) 
-        return setLoad(false)
+
+       setLoad(false)
+       return window.location.reload()
     }
 
     const handleSelectChange = (e: FormEvent<HTMLSelectElement>) => {

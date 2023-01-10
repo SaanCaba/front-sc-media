@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Button from './components/myTags/Button'
 import styles from './page.module.css'
 
 export default async function HomePage() {
@@ -11,13 +12,14 @@ export default async function HomePage() {
       </div>
       <div>
       <Link href='/home'>
-      <button className='p-2 font-semibold'>Home</button>
+        <Button styles={'p-2 font-semibold'} message={'Home'} type={'button'}  />
+     
       </Link>
       <Link href='/login'>
-      <button className='p-2 font-semibold'>Login</button>
+        <Button styles={'p-2 font-semibold'} message={'Login'} type={'button'} />
       </Link>
       <Link href='/register'>
-      <button className='p-2 font-semibold'>Register</button>
+        <Button styles={'p-2 font-semibold'} message={'Register'} type={'button'} />
       </Link>
       </div>
       </div>

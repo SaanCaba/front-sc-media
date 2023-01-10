@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
+import Input from './myTags/Input';
+import Button from './myTags/Button';
 import { setToken } from '../../redux/action';
 
 type LoginProps = {
@@ -39,7 +41,8 @@ export default function Login() {
     })
   }
 
-  const handleSend = async () => {
+  const handleSend = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const data = await login(userdata)
     if(typeof data === 'string'){
       if(data.includes('ERROR')){
@@ -51,25 +54,27 @@ export default function Login() {
     localStorage.setItem('token', data?.data.data)
     localStorage.setItem('userID', data?.data.id)
     localStorage.setItem('userName', data?.data.username)
-    dispatch(setToken())
     Swal.fire({
       text:data.data.message
     })
+    dispatch(setToken())
     return router.push('/home')
   }
 
 
 
   return (
-     <div>
-        <h1>Login</h1>
-        <input onChange={(e) => handleChange(e)} value={userdata.username} type='text' name='username' placeholder='Username' />
-        <input onChange={(e) => handleChange(e)} value={userdata.password} type='password' name='password' placeholder='Password' />
-        <button onClick={() => handleSend()}>Login!</button> 
+     <form onSubmit={(e) => handleSend(e)}>
+        <h1 className='text-center p-2 font-bold'>Login</h1>
+        <div className='flex flex-col gap-3'>
+        <Input styles={'border-2 border-black rounded p-2'} method={handleChange} type={'text'} value={userdata.username} name={'username'} placeholder={'Username...'} />
+        <Input styles={'border-2 border-black rounded p-2'} method={handleChange} type={'password'} value={userdata.password} name={'password'} placeholder={'Password...'} />
+        </div>
+        <Button styles={'p-2 bg-black text-white rounded'} message={'Login!'} type={'submit'} />
         <h2>No tienes cuenta?</h2>
         <Link href='/register'>
         Registrate!
         </Link>
-    </div>
+    </form>
   );
 }

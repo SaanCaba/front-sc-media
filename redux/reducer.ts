@@ -20,7 +20,6 @@ type Action = {
 export function rootReducer(state = initialState , action: Action) : any{
     switch(action.type){
         case SET_TOKEN:
-            console.log('first')
           return{
               ...state,
               userToken: true

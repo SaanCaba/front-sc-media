@@ -4,7 +4,6 @@ export const SET_USERNAME = "SET_USERNAME"
 export const SET_THEME = "SET_THEME"
 
 export function setToken(){
-
     return{
         type : SET_TOKEN,
     }
@@ -23,8 +22,3 @@ export function setUserName(name: string | null){
     }
 }
 
-export function setTheme(theme:string){
-    return{
-            type: SET_THEME, payload: theme
-    }
-}

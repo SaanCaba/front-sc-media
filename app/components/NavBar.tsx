@@ -2,51 +2,45 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setToken } from '../../redux/action'
-import LoginButton from './LoginButton'
-import Logout from './Logout'
-import PublishProduct from './PublishProduct'
+import { deleteToken, setToken } from '../../redux/action'
+import Button from './myTags/Button'
 
 function NavBar() {
-
   let user = useSelector((state: any) => state.userToken)
-  console.log(user)
   let dispatch = useDispatch()
-  const [theme, setTheme] = useState<null | string>('')
-
   useEffect(() => {
-    let tema = localStorage.getItem('theme')
-    setTheme(tema)
     if(user === false){
-     let token = localStorage.getItem('token')
-     if(token === undefined || token === null){
-      return 
-     }else{
-      dispatch(setToken())
-     }
+      let token = localStorage.getItem('token')
+      if(token === undefined || token === null){
+       return 
+      }else{
+       dispatch(setToken())
+      }
     }
+  }, [user])
 
-  }, [user]) 
+  const handleLogout = () =>{
+    localStorage.removeItem('token')
+    localStorage.removeItem('userID')
+    localStorage.removeItem('userName')
+    dispatch(deleteToken())
+  }
 
   return (
     //ocultar boton logout si hay token!
-    <div className={theme === 'dark' ? ' bg-[#343538] z-50': 'z-50' }>
-    <div className='flex w-screen justify-center gap-2'>
-      {
-        user === true ? <Logout theme={theme} /> : <LoginButton />
-      }
-      <PublishProduct theme={theme} />
-      <Link href='/home'>
-      <button className={ theme === 'dark' ? 'p-2 bg-white text-black' : 'p-2 bg-black text-white'}>Home</button>
-      </Link>
+    <div className='flex w-full justify-center'>
       {
         user === true ? (
-          <Link href='/profile'>
-      <button className={ theme === 'dark' ? 'p-2 bg-white text-black' : 'p-2 bg-black text-white'}>Profile</button>
-         </Link>
-        ) : ''
+          <Link href='/login'>
+          <Button method={handleLogout} type={'button'} message={'Logout'} styles={'p-2 bg-black text-white'} />
+          </Link>
+        )
+        : (
+          <Link href='/login'>
+          <Button type={'button'} styles={'p-2 bg-black text-white'} message={'Login'}></Button>
+          </Link>
+        )
       }
-    </div>
     </div>
 
   )

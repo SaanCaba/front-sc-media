@@ -3,7 +3,7 @@ import React from 'react'
 interface Props{
     method: (e : any) => any
     type: string
-    value?: string
+    value?: string | number
     placeholder?:string
     name:string
     styles: string

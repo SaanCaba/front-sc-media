@@ -10,7 +10,7 @@ import Button from './myTags/Button';
 import { setToken } from '../../redux/action';
 
 type LoginProps = {
-  username: string,
+  name: string,
   password: string
 }
 
@@ -26,7 +26,7 @@ const login = async (info: LoginProps ) => {
 
 export default function Login() {
   const [userdata, setUserdata] = useState({
-    username: '',
+    name: '',
     password: ''
   });
 
@@ -67,7 +67,7 @@ export default function Login() {
      <form onSubmit={(e) => handleSend(e)}>
         <h1 className='text-center p-2 font-bold'>Login</h1>
         <div className='flex flex-col gap-3'>
-        <Input styles={'border-2 border-black rounded p-2'} method={handleChange} type={'text'} value={userdata.username} name={'username'} placeholder={'Username...'} />
+        <Input styles={'border-2 border-black rounded p-2'} method={handleChange} type={'text'} value={userdata.name} name={'name'} placeholder={'Name...'} />
         <Input styles={'border-2 border-black rounded p-2'} method={handleChange} type={'password'} value={userdata.password} name={'password'} placeholder={'Password...'} />
         </div>
         <Button styles={'p-2 bg-black text-white rounded'} message={'Login!'} type={'submit'} />

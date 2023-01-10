@@ -7,7 +7,7 @@ import Input from './myTags/Input';
 import Button from './myTags/Button';
 
 type RegisterProps = {
-    username: string,
+  name: string,
     password: string
 }
 
@@ -22,7 +22,7 @@ const register = async (info: RegisterProps ) => {
 export default function Register() {
   const [userdata, setUserdata] = useState({
     email: '',
-    username: '',
+    name: '',
     password: ''
   });
   const router = useRouter()
@@ -53,14 +53,16 @@ export default function Register() {
 
   console.log(userdata)
   return (
+    <>
     <form onSubmit={(e) => handleSend(e)}>
         <h1>Register</h1>
         <div className='flex flex-col gap-3'>
-        <Input styles={"border-2 border-black focus:outline-none"} method={handleChange} value={userdata.username} type={'text'} name={'username'} placeholder={'Username...'} />
+        <Input styles={"border-2 border-black focus:outline-none"} method={handleChange} value={userdata.name} type={'text'} name={'name'} placeholder={'Name of the company...'} />
         <Input styles={"border-2 border-black focus:outline-none"} method={handleChange} value={userdata.email} type={'email'} name={'email'} placeholder={'Email...'}  />
         <Input styles={"border-2 border-black focus:outline-none"} method={handleChange} value={userdata.password} type={'password'} name={'password'} placeholder={'Password...'}  />
         </div>
         <Button styles={'p-2 rounded bg-black text-white'} type={'submit'}  message={'Register!'} />
     </form>
+    </>
   );
 }
